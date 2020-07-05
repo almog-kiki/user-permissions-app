@@ -1,0 +1,33 @@
+.modal-header{
+    background-color: #33b5e5;
+}
+.radio-btns-container{
+    display: flex;
+    justify-content: space-evenly;
+}
+.radio-btn{
+    margin: 0 8px;
+}
+.role-title{
+    font-size: 16px;
+}
+.modal-header{
+    color:white !important;
+}
+.modal-content:not(.card-image) .close{
+    color:white !important;
+
+}
+.form-container{
+    width: 80%;
+    margin: 15px auto;
+    margin-bottom: 0;
+}
+.add-user-btn{
+    width: 120px;
+    height: 40px;
+    line-height: 15px;
+}
+.modal-footer{
+    padding: 1em 0 !important;
+}

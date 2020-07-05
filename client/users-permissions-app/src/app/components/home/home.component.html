@@ -1,0 +1,16 @@
+
+<div class="bg home-container"> 
+    <div class="home-title">
+        <h1>{{CONSTANTS.HOME_PAGE_TITLE}}</h1>
+    </div>
+    <div class="welcome-container">
+        <span>
+            <img src="{{icon}}" height="27" height="27" alt="" />
+        </span>
+        <span class="welcome-title"> {{CONSTANTS.WELCOME_TITLE}} {{currentUser && currentUser.username}}</span>
+        <div *ngIf="!isGuest()" lass="navigate-btn">
+            <button  type="button" (click)="navigateToUsersPage()">{{CONSTANTS.GO_TO_USERS_PAGE}}</button>
+        </div>
+    </div>
+</div>
+

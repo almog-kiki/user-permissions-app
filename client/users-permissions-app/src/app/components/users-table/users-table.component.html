@@ -1,0 +1,52 @@
+
+
+<!-- export all text to CONSTANTSs  -->
+<app-confirm-modal></app-confirm-modal>
+
+<div  class="card user-table-container">
+    <div class="card-header font-weight-bold text-uppercase py-2 table-title">
+        <span class="text-center"> {{ CONSTANTS.USER_TITLE }} </span>
+        <app-add-user *ngIf="isAdministrator()"  ></app-add-user>
+        <button *ngIf="isAdministrator()" type="button" mdbBtn color="danger" 
+          rounded="true" size="sm" 
+          (click)="openModalConfirmation(CONSTANTS.DELETE_ALL_USERS_CONFIRMATION_MESSAGE,removeAllUsers)">
+          {{ CONSTANTS.REMOVE_ALL_TITLE }}</button>
+    </div>
+
+    <app-loader *ngIf="isLoading"></app-loader>
+
+    <div *ngIf="!isLoading" class="card-body">
+      <div id="table" class="table-editable">
+        <table class="table table-bordered table-responsive-md table-striped text-center">
+          <tr>
+            <th class="text-center">{{ CONSTANTS.USERNAME_COLUMN_TITLE }}</th>
+            <th class="text-center">{{ CONSTANTS.ROLE_TITLE }}</th>
+            <th class="text-center">{{ CONSTANTS.CREATED_COLUMN_TITLE }}</th>
+            <th class="text-center">{{ CONSTANTS.UPDATED_COLUMN_TITLE }}</th>
+            <th *ngIf="isAdministrator()" class="text-center">{{ CONSTANTS.REMOVE_TITLE }}</th>
+          </tr>
+          <tr *ngFor="let user of users; let id = index">
+            <td>
+              <span contenteditable="false" (keyup)="changeValue($event)" (blur)="updateList(id, 'username', user ,$event)">{{user.username}}</span>
+            </td>
+            <td>
+              <span contenteditable="false" (keyup)="changeValue($event)" (blur)="updateList(id, 'role',user, $event)"> {{user.role.name}}</span>
+            </td>
+            <td>
+              <span contenteditable="false" (keyup)="changeValue($event)" (blur)="updateList(id, 'createdAt',user, $event)">{{user.createdAt}}</span>
+            </td>
+            <td>
+              <span contenteditable="false" (keyup)="changeValue($event)" (blur)="updateList(id, 'updatedAt', user, $event)">{{ user.updatedAt }}</span>
+            </td>
+            <td *ngIf="isAdministrator()" >
+              <span class="table-remove">
+                <button type="button" mdbBtn color="danger" rounded="true" size="sm" class="my-0" 
+                  [disabled]="user._id === currentUser._id"  
+                  (click)="openModalConfirmation(CONSTANTS.DELETE_USER_CONFIRMATION_MESSAGE,remove,user._id)" >{{ CONSTANTS.REMOVE_TITLE }}</button>
+              </span>
+            </td>
+          </tr>
+        </table>
+      </div>
+    </div>
+</div>

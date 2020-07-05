@@ -1,0 +1,36 @@
+
+<div class="login-container">
+  <div class="login-inputs">
+    <app-loader *ngIf="isLoading"></app-loader>
+    <form  *ngIf="!isLoading" [formGroup]="userFormGroup"  (ngSubmit)="handleLogin()">
+        <div class="input-container">
+          <input id="username" class="form-control" 
+            placeholder="{{CONSTANTS.USERNAME_PLACEHOLDER}}"
+            formControlName="username" required />
+          <div *ngIf="username.invalid && (username.dirty || username.touched)" 
+              class="alert alert-danger">
+              <div *ngIf="username.errors.required">{{ CONSTANTS.USERNAME_REQUIRED_VALIDATION }}</div>
+              <div *ngIf="username.errors.minlength">{{ CONSTANTS.USERNAME_LENGTH_VALIDATION }}</div>
+          </div>
+        </div>
+        
+        <div class="input-container">
+          <input id="password"  placeholder="{{CONSTANTS.PASSWORD_PLACEHOLDER}}" class="form-control" formControlName="password" required />
+          <div *ngIf="password.invalid && (password.dirty || password.touched)" 
+              class="alert alert-danger">
+              <div *ngIf="password.errors.required">{{ CONSTANTS.PASSWORD_REQUIRED_VALIDATION }}</div>
+              <div *ngIf="password.errors.minlength">{{ CONSTANTS.PASSWORD_LENGTH_VALIDATION }}</div>
+          </div>
+        </div>
+
+        <div class="btns">
+          <button  type = "button" (click)="clearFields()" class="btn btn-light clear-btn">{{ CONSTANTS.CLEAR_TITLE }}</button>
+          <button type = "submit"  [disabled]="username.errors || password.errors ? true : false" class="btn btn-info login-btn" >{{ CONSTANTS.LOGIN_TITLE }}</button>
+        </div> 
+        <div class="center">
+          <button  class="login-as-a-guest" type = "button" (click)="loginAsAGuest()">{{ CONSTANTS.LOG_IN_AS_A_GUEST }}</button>
+        </div>
+    </form>
+  </div>
+
+</div>

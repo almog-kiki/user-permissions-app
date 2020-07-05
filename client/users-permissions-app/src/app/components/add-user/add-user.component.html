@@ -1,0 +1,63 @@
+<button type="button" mdbBtn 
+    class="waves-light" data-toggle="modal" data-target="#addUser" 
+    color="info"  rounded="true" size="sm"
+    (click)="showModal()"
+  mdbWavesEffect>{{CONSTANTS.ADD_TITLE}}</button>
+
+<div mdbModal #frame="mdbModal" class="modal fade" id="frameModalTop" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <!--Header-->
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">{{ CONSTANTS.ADD_NEW_USER_TITLE }}</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close" (click)="hideModal()">
+          <span aria-hidden="true">×</span>
+        </button>
+      </div>
+      <!--Body-->
+      <div class="modal-body">
+        <form  [formGroup]="userFormGroup" class="form-container" (ngSubmit)="AddNewUser()">
+            <div class="input-container">
+              <input id="username" class="form-control" 
+                placeholder="{{CONSTANTS.USERNAME_PLACEHOLDER}}"
+                formControlName="username" required />
+              <div *ngIf="username.invalid && (username.dirty || username.touched)" 
+                  class="alert alert-danger">
+                  <div *ngIf="username.errors.required">{{ CONSTANTS.USERNAME_REQUIRED_VALIDATION }}</div>
+                  <div *ngIf="username.errors.minlength">{{ CONSTANTS.USERNAME_LENGTH_VALIDATION }} </div>
+              </div>
+            </div>
+            <div class="input-container">
+              <input id="password"  placeholder="{{CONSTANTS.PASSWORD_PLACEHOLDER}}" class="form-control" formControlName="password" required />
+              <div *ngIf="password.invalid && (password.dirty || password.touched)" 
+                  class="alert alert-danger">
+                  <div *ngIf="password.errors.required">{{ CONSTANTS.PASSWORD_REQUIRED_VALIDATION }}</div>
+                  <div *ngIf="password.errors.minlength">{{ CONSTANTS.PASSWORD_LENGTH_VALIDATION }}</div>
+              </div>
+            </div>
+            <div style="margin-bottom: 10px;">
+              <span class="role-title" >{{ CONSTANTS.ROLE_TITLE }}:</span>
+            </div>
+            <div class="input-container radio-btns-container"> 
+                <div *ngFor="let role of roles; let id = index">
+                    <input type="radio" name="radiogroup"  class="radio-btn"
+                            (change)="onSelectionChange(role)"
+                             [checked]="(index === 1)" 
+                            [value]="role.id"
+                            >
+                            <span>{{role.name}}</span>
+                </div>
+            </div>
+            <!-- Footer -->
+           <div class="modal-footer btns">
+                <button  type="button" mdbBtn color="info" outline="true" class="waves-light add-user-btn" mdbWavesEffect data-dismiss="modal" (click)="frame.hide()">{{ CONSTANTS.CLOSE_TITLE }}</button>
+                <button  type = "submit"  [disabled]="isFormValidate() ? false : true"    class="btn btn-info add-user-btn" >{{ CONSTANTS.ADD_TITLE }}</button>
+            </div>
+        </form>
+
+      </div>
+   
+    </div>
+  </div>
+</div>

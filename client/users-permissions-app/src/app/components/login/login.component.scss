@@ -1,0 +1,40 @@
+.login-container{
+    -webkit-box-shadow: 4px 5px 5px 0px rgba(224,224,224,0.93);
+    -moz-box-shadow: 4px 5px 5px 0px rgba(224,224,224,0.93);
+    box-shadow: 4px 5px 5px 0px rgba(224,224,224,0.93);
+    background-color: #ffffff;
+    width: 40%;
+    min-width: 300px;
+    margin: 2em auto;
+    padding: 1em;
+}
+
+.login-inputs{
+    width: 65%;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    padding-top: 3em;
+}
+.clear-btn{
+    width: 120px;
+    margin-right: 15px;
+    background-color: aliceblue;
+}
+.login-btn{
+    width: 120px;
+}
+.btns{
+    display: flex;
+    justify-content: flex-end;
+}
+.input-icon {
+    position: absolute !important;
+    top: 17px;
+    left: -25px;
+}
+.login-as-a-guest{
+    border: none;
+    color: #2b6bff;
+    background: none;
+    text-decoration: underline;
+}
